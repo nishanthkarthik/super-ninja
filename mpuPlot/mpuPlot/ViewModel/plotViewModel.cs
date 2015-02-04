@@ -25,14 +25,14 @@ namespace mpuPlot.ViewModel
             IList<readingFormat> readingStore = JsonConvert.DeserializeObject<IList<readingFormat>>(readingString);
             if (readingStore != null)
             {
-                xCoord = new List<DataPoint>() { };
-                yCoord = new List<DataPoint>() { };
-                zCoord = new List<DataPoint>() { };
+                xCoord = new List<DataPoint>(readingStore.Count) { };
+                yCoord = new List<DataPoint>(readingStore.Count) { };
+                zCoord = new List<DataPoint>(readingStore.Count) { };
                 for (int i = 0; i < readingStore.Count; i++)
                 {
-                    xCoord[i] = new DataPoint(i,readingStore[i].x);
-                    yCoord[i] = new DataPoint(i, readingStore[i].y);
-                    zCoord[i] = new DataPoint(i, readingStore[i].z);
+                    xCoord.Add(new DataPoint(i, (double)readingStore[i].x / 32767.0));
+                    yCoord.Add(new DataPoint(i, (double)readingStore[i].y / 32767.0));
+                    zCoord.Add(new DataPoint(i, (double)readingStore[i].z / 32767.0));
                 }
             }
         }
