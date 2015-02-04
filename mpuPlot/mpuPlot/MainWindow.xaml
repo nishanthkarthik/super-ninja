@@ -5,7 +5,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.PanningMode="HorizontalOnly" Height="Auto">
-            <oxy:PlotView x:Name="_plotArea" Title="{Binding Title}">
+            <oxy:PlotView Width="20000" x:Name="_plotArea" Title="{Binding Title}">
                 <oxy:PlotView.Series>
                     <oxy:LineSeries StrokeThickness="0.5" Color="Green" ItemsSource="{Binding xCoord}"/>
                     <oxy:LineSeries StrokeThickness="0.5" Color="Blue" ItemsSource="{Binding yCoord}"/>
