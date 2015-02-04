@@ -4,6 +4,10 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <oxy:PlotView x:Name="_plotArea" Title="{Binding Title}">
+            <oxy:PlotView.Series>
+                <oxy:LineSeries ItemsSource="{Binding Points}"/>
+            </oxy:PlotView.Series>
+        </oxy:PlotView>
     </Grid>
 </Window>

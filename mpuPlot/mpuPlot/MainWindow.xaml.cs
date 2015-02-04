@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mpuPlot.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace mpuPlot
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            plotViewModel plotData = new plotViewModel();
+            _plotArea.DataContext = plotData;
         }
     }
 }
