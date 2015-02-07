@@ -19,7 +19,7 @@ namespace mpuPlot.ViewModel
         public IList<DataPoint> zCoord { get; set; }
         public plotViewModel()
         {
-            this.Title = "mpu";
+            this.Title = "mpu readings from mpu.json";
             StreamReader _reader = new StreamReader("mpu.json");
             string readingString = _reader.ReadToEnd();
             IList<readingFormat> readingStore = JsonConvert.DeserializeObject<IList<readingFormat>>(readingString);
@@ -28,11 +28,14 @@ namespace mpuPlot.ViewModel
                 xCoord = new List<DataPoint>(readingStore.Count) { };
                 yCoord = new List<DataPoint>(readingStore.Count) { };
                 zCoord = new List<DataPoint>(readingStore.Count) { };
+                double initialReading = (double)(readingStore[0].M * 60.0) + readingStore[0].S + (readingStore[0].MS / 1000.0);
+                double currentReading = 0.0;
                 for (int i = 0; i < readingStore.Count; i++)
                 {
-                    xCoord.Add(new DataPoint(i, (double)readingStore[i].x / 32767.0 * 2));
-                    yCoord.Add(new DataPoint(i, (double)readingStore[i].y / 32767.0 * 2));
-                    zCoord.Add(new DataPoint(i, (double)readingStore[i].z / 32767.0 * 2));
+                    currentReading = (double)(readingStore[i].M * 60.0) + readingStore[i].S + (readingStore[i].MS / 1000.0);
+                    xCoord.Add(new DataPoint((double)currentReading - initialReading, (double)readingStore[i].x / 32767.0 * 2));
+                    yCoord.Add(new DataPoint((double)currentReading - initialReading, (double)readingStore[i].y / 32767.0 * 2));
+                    zCoord.Add(new DataPoint((double)currentReading - initialReading, (double)readingStore[i].z / 32767.0 * 2));
                 }
             }
         }
